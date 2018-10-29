@@ -1,0 +1,32 @@
+---
+title: "Estimate tumor purity scores usng ESTIMATE"
+---
+
+Run ESTIMATE tool on  set of 24 patient tumors from a Cisplatin clinical trial 
+
+```{r}
+library(estimate)
+source("gfunctions.R")
+
+# gene expression dataset 
+exprs_cisplatin = readRDS("./DATA/GSE18864_RMA.rds")
+dim(exprs_cisplatin)
+
+boxplot(exprs_cisplatin)
+
+tmp = data.frame(Description = rep("CisplatinData",nrow(exprs_cisplatin)), exprs_cisplatin)
+
+# filename of the input data
+name_f = "CisplatinData.gct"
+write.gct(tmp, name_f)
+
+# filename of the output ESTIMATE scores
+output.ds = "./ESTIMATE_scores.gct"
+
+# run ESTIMATE
+estimateScore(input.ds = name_f, output.ds = output.ds, platform = 'affymetrix')
+
+scores = read.gct(output.ds)
+scores
+```
+
