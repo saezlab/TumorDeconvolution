@@ -9,7 +9,7 @@ library(estimate)
 source("gfunctions.R")
 
 # gene expression dataset 
-exprs_cisplatin = readRDS("../DATA/GSE18864_RMA.rds")
+exprs_cisplatin = readRDS("./DATA/GSE18864_RMA.rds")
 dim(exprs_cisplatin)
 
 boxplot(exprs_cisplatin)
